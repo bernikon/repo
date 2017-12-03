@@ -19,6 +19,10 @@ public class MainController {
     @ResponseBody
     public String index() {
         List<ContactBookModel> contactBookModel = contactBookRepository.findByFirstname("Jan");
-        return contactBookModel.toString();
+        StringBuilder stringBuilder = new StringBuilder();
+        for (ContactBookModel model : contactBookModel) {
+            stringBuilder.append(model.toString());
+        }
+        return stringBuilder.toString();
     }
 }
