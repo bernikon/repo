@@ -20,7 +20,7 @@ public class ContactBookModel {
     private String lastname;
     private String gender;
     @Column(name = "contact_id")
-    @OneToMany(mappedBy = "contactId")
+//    @OneToMany(mappedBy = "contactId")
     private int contactId;
 
 }
