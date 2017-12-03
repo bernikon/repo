@@ -12,9 +12,8 @@ public class MainController {
     @Autowired
     ContactBookRepository contactBookRepository;
 
-    @GetMapping("/")
-    @ResponseBody
-    public String index(){
-        return "Czesc!";
-    }
+//    @GetMapping("/")
+
+
+    
 }
