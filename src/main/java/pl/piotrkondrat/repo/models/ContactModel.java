@@ -18,5 +18,7 @@ public class ContactModel {
     @Column(name = "contact_value")
     private String contactValue;
     @Column(name = "contact_id")
+    @ManyToOne
+    @JoinColumn(name = "contactId")
     private int contactId;
 }
