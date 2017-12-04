@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import pl.piotrkondrat.repo.models.ContactBookModel;
-import pl.piotrkondrat.repo.models.repositories.ContactBookRepository;
+import pl.piotrkondrat.repo.models.PersonModel;
+import pl.piotrkondrat.repo.models.repositories.PersonRepository;
 
 import java.util.List;
 
@@ -13,14 +13,14 @@ import java.util.List;
 public class MainController {
 
     @Autowired
-    ContactBookRepository contactBookRepository;
+    PersonRepository personRepository;
 
     @GetMapping("/")
     @ResponseBody
     public String index() {
-        List<ContactBookModel> contactBookModel = contactBookRepository.findByFirstname("Jan");
+        List<PersonModel> personModel = personRepository.findByFirstname("Jan");
         StringBuilder stringBuilder = new StringBuilder();
-        for (ContactBookModel model : contactBookModel) {
+        for (PersonModel model : personModel) {
             stringBuilder.append(model.toString());
         }
         return stringBuilder.toString();
