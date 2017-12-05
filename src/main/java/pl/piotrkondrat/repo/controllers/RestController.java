@@ -24,7 +24,7 @@ public class RestController {
         return new ResponseEntity(personRepository.findAll(), HttpStatus.OK);
     }
 
-// tu nie wywala:
+// tu wywala:
 // HttpMessageNotWritableException: Could not write JSON: Infinite recursion (StackOverflowError);
 // nested exception is com.fasterxml.jackson.databind.JsonMappingException...
 
