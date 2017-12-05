@@ -15,14 +15,18 @@ public class MainController {
     @Autowired
     PersonRepository personRepository;
 
-    @GetMapping("/")
-    @ResponseBody
-    public String index() {
-        List<PersonModel> personModel = personRepository.findByFirstname("Jan");
-        StringBuilder stringBuilder = new StringBuilder();
-        for (PersonModel model : personModel) {
-            stringBuilder.append(model.toString());
-        }
-        return stringBuilder.toString();
-    }
+
+
+
+
+//    @GetMapping("/")
+//    @ResponseBody
+//    public String index() {
+//        List<PersonModel> personModel = personRepository.findByFirstname("Jan");
+//        StringBuilder stringBuilder = new StringBuilder();
+//        for (PersonModel model : personModel) {
+//            stringBuilder.append(model.toString());
+//        }
+//        return stringBuilder.toString();
+//    }
 }

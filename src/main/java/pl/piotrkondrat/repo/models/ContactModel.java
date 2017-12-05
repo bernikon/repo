@@ -10,13 +10,18 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Table(name = "contact")
 public class ContactModel {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+
     @Column(name = "contact_type")
     private String contactType;
+
     @Column(name = "contact_value")
     private String contactValue;
-    @Column(name = "person_id")
-    private int personId;
+
+    @ManyToOne
+    @JoinColumn (name = "person_id")
+    private PersonModel personId;
 }

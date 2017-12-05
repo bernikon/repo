@@ -16,17 +16,17 @@ public class RestController {
     @Autowired
     PersonRepository personRepository;
 
-    @RequestMapping(value = "/rest/contact", method = RequestMethod.GET,
-            produces = "application/json")
-    public ResponseEntity contact() {
-        return new ResponseEntity(personRepository.findAll(), HttpStatus.OK);
-    }
-
-    @RequestMapping(value = "/rest/contact", method = RequestMethod.POST,
-            produces = "application/json")
-    public ResponseEntity contact(@RequestBody PersonModel model) {
-        personRepository.save(model);
-        return new ResponseEntity(HttpStatus.OK);
-    }
+//    @RequestMapping(value = "/rest/contact", method = RequestMethod.GET,
+//            produces = "application/json")
+//    public ResponseEntity contact() {
+//        return new ResponseEntity(personRepository.findAll(), HttpStatus.OK);
+//    }
+//
+//    @RequestMapping(value = "/rest/contact", method = RequestMethod.POST,
+//            produces = "application/json")
+//    public ResponseEntity contact(@RequestBody PersonModel model) {
+//        personRepository.save(model);
+//        return new ResponseEntity(HttpStatus.OK);
+//    }
 
 }
