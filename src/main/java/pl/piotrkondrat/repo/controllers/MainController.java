@@ -16,7 +16,7 @@ public class MainController {
     PersonRepository personRepository;
 
 
-
+//w sumie MainController nie jest potrzebny
 
 
 //    @GetMapping("/")
