@@ -17,20 +17,20 @@ public class RestController {
     @Autowired
     PersonRepository personRepository;
 
-
+    // działa
     @RequestMapping(value = "/rest/people", method = RequestMethod.GET,
             produces = "application/json")
     public ResponseEntity people() {
         return new ResponseEntity(personRepository.findAll(), HttpStatus.OK);
     }
 
-// do persona o id 1 przypisuje kontakty z 1 i 2 ???
-
+    // działa
     @RequestMapping(value = "/rest/people/{lastname}", method = RequestMethod.GET,
             produces = "application/json")
     public ResponseEntity people(@PathVariable("lastname") String lastname) {
         return new ResponseEntity(personRepository.findByLastnameIgnoreCase(lastname), HttpStatus.OK);
     }
+
 
     @RequestMapping(value = "/rest/people/delete/{id}", method = RequestMethod.DELETE,
             produces = "application/json")
