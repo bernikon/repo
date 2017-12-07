@@ -18,8 +18,6 @@ public class RestController {
     PersonRepository personRepository;
 
 
-// źle mapuje
-
     @RequestMapping(value = "/rest/people", method = RequestMethod.GET,
             produces = "application/json")
     public ResponseEntity people() {
