@@ -18,27 +18,32 @@ public class RestController {
     PersonRepository personRepository;
 
 
-    @RequestMapping(value = "/rest/contact", method = RequestMethod.GET,
+// źle mapuje
+
+    @RequestMapping(value = "/rest/people", method = RequestMethod.GET,
             produces = "application/json")
-    public ResponseEntity contact() {
+    public ResponseEntity people() {
         return new ResponseEntity(personRepository.findAll(), HttpStatus.OK);
     }
 
-// tu wywala:
-// HttpMessageNotWritableException: Could not write JSON: Infinite recursion (StackOverflowError);
-// nested exception is com.fasterxml.jackson.databind.JsonMappingException...
+// do persona o id 1 przypisuje kontakty z 1 i 2 ???
 
-//    @RequestMapping(value = "/rest/person/{lastname}", method = RequestMethod.GET,
-//            produces = "application/json")
-//    public ResponseEntity person(@PathVariable("lastname") String lastname) {
-//        return new ResponseEntity(personRepository.findByLastnameIgnoreCase(lastname), HttpStatus.OK);
-//    }
+    @RequestMapping(value = "/rest/people/{lastname}", method = RequestMethod.GET,
+            produces = "application/json")
+    public ResponseEntity people(@PathVariable("lastname") String lastname) {
+        return new ResponseEntity(personRepository.findByLastnameIgnoreCase(lastname), HttpStatus.OK);
+    }
 
-//    @RequestMapping(value = "/rest/person/delete/{id}", method = RequestMethod.DELETE,
-//            produces = "application/json")
-//    public ResponseEntity person(@PathVariable("id") int id) {
-//        personRepository.delete(id);
-//        return new ResponseEntity(HttpStatus.OK);
+    @RequestMapping(value = "/rest/people/delete/{id}", method = RequestMethod.DELETE,
+            produces = "application/json")
+    public ResponseEntity people(@PathVariable("id") int id) {
+        personRepository.delete(id);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+//    @RequestMapping(method = RequestMethod.POST)
+//    public ResponseEntity<?> addPerson(@RequestBody PersonModel personModel) {
+//        return new ResponseEntity<>(personRepository.save(personModel), HttpStatus.CREATED);
 //    }
 
 

@@ -1,13 +1,10 @@
 package pl.piotrkondrat.repo.models;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
 
-@Data
 @Entity
-@NoArgsConstructor
 @Table(name = "contact")
 public class ContactModel {
 
@@ -22,6 +19,39 @@ public class ContactModel {
     private String contactValue;
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn (name = "person_id")
     private PersonModel personId;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getContactType() {
+        return contactType;
+    }
+
+    public void setContactType(String contactType) {
+        this.contactType = contactType;
+    }
+
+    public String getContactValue() {
+        return contactValue;
+    }
+
+    public void setContactValue(String contactValue) {
+        this.contactValue = contactValue;
+    }
+
+    public PersonModel getPersonId() {
+        return personId;
+    }
+
+    public void setPersonId(PersonModel personId) {
+        this.personId = personId;
+    }
 }

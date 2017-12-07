@@ -1,20 +1,14 @@
 package pl.piotrkondrat.repo.models;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 import java.util.List;
 
-
-@Data
 @Entity
-@NoArgsConstructor
 @Table(name="person")
 public class PersonModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private long id;
 
     private String firstname;
 
@@ -25,5 +19,46 @@ public class PersonModel {
     @OneToMany(mappedBy = "personId", cascade = CascadeType.ALL)
     private List<ContactModel> contacts;
 
+    public PersonModel(){
+    }
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public List<ContactModel> getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(List<ContactModel> contacts) {
+        this.contacts = contacts;
+    }
 }
