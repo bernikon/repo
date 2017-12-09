@@ -39,10 +39,12 @@ public class RestController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-//    @RequestMapping(method = RequestMethod.POST)
-//    public ResponseEntity<?> addPerson(@RequestBody PersonModel personModel) {
-//        return new ResponseEntity<>(personRepository.save(personModel), HttpStatus.CREATED);
-//    }
+    @RequestMapping(value = "/rest/people", method = RequestMethod.POST,
+            produces = "application/json")
+    public ResponseEntity addPerson(@RequestBody PersonModel model) {
+        personRepository.save(model);
+        return new ResponseEntity(HttpStatus.OK);
+    }
 
 
 //    @RequestMapping(value = "/rest/contact", method = RequestMethod.POST,
