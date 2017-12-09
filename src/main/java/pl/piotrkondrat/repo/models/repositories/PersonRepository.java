@@ -16,7 +16,7 @@ import java.util.List;
 //    List<PersonModel> findByFirstname(@Param("name") String name);
 //}
 
-public interface PersonRepository extends CrudRepository<PersonModel, Integer> {
+public interface PersonRepository extends CrudRepository<PersonModel, Long> {
     List<PersonModel> findByLastnameIgnoreCase(String text);
 }
 
