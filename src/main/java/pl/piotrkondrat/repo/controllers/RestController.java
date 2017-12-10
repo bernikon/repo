@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import pl.piotrkondrat.repo.models.ContactModel;
 import pl.piotrkondrat.repo.models.PersonModel;
 import pl.piotrkondrat.repo.models.repositories.PersonRepository;
 
@@ -42,6 +43,20 @@ public class RestController {
     @RequestMapping(value = "/rest/people", method = RequestMethod.POST,
             produces = "application/json")
     public ResponseEntity addPerson(@RequestBody PersonModel model) {
+        personRepository.save(model);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/rest/people/{id}/{firstname}/{lastname}/{gender}", method = RequestMethod.PUT,
+            produces = "application/json")
+    public ResponseEntity peopleChange(@PathVariable("id") Long id,
+                                       @PathVariable("firstname") String firstname,
+                                       @PathVariable("lastname") String lastname,
+                                       @PathVariable("gender") String gender) {
+        PersonModel model = personRepository.findOne(id);
+        model.setFirstname(firstname);
+        model.setLastname(lastname);
+        model.setGender(gender);
         personRepository.save(model);
         return new ResponseEntity(HttpStatus.OK);
     }
