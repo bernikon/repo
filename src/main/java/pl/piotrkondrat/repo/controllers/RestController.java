@@ -54,6 +54,10 @@ public class RestController {
                                        @PathVariable("lastname") String lastname,
                                        @PathVariable("gender") String gender) {
         PersonModel model = personRepository.findOne(id);
+
+        if(personRepository.existsByLastnameEquals(lastname)){
+            return new ResponseEntity("This lastname is already exist", HttpStatus.CONFLICT);
+        }
         model.setFirstname(firstname);
         model.setLastname(lastname);
         model.setGender(gender);
@@ -62,11 +66,18 @@ public class RestController {
     }
 
 
-//    @RequestMapping(value = "/rest/contact", method = RequestMethod.POST,
-//            produces = "application/json")
-//    public ResponseEntity contact(@RequestBody PersonModel model) {
-//        personRepository.save(model);
-//        return new ResponseEntity(HttpStatus.OK);
+
+
+//    zmiana kontaktów ???
+
+//@RequestMapping(value = "/rest/people/{id}/{contactType}/{contactValue}", method = RequestMethod.PUT,
+//produces = "application/json")
+//    public ResponseEntity contactChange(@PathVariable("id") Long id,
+//                                        @PathVariable("contactType") String contactType,
+//                                        @PathVariable("contactValue") String contactValue){
+//    PersonModel model = personRepository.findOne(id);
+//    personRepository.save(model);
+//    return new ResponseEntity(HttpStatus.OK);
 //    }
 
 }
