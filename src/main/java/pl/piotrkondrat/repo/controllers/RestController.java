@@ -4,10 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import pl.piotrkondrat.repo.models.ContactModel;
 import pl.piotrkondrat.repo.models.PersonModel;
 import pl.piotrkondrat.repo.models.repositories.PersonRepository;
@@ -21,17 +18,20 @@ public class RestController {
 
     @RequestMapping(value = "/rest/people-search", method = RequestMethod.GET,
             produces = "application/json")
-    public ResponseEntity people() {
+    public ResponseEntity peopleIndex(@RequestHeader("Password-App") String password) {
+
+        if(!password.equalsIgnoreCase("test")){
+            return new ResponseEntity("No pass", HttpStatus.BAD_REQUEST);
+        }
+
         return new ResponseEntity(personRepository.findAll(), HttpStatus.OK);
     }
-
 
     @RequestMapping(value = "/rest/people-search/{lastname}", method = RequestMethod.GET,
             produces = "application/json")
     public ResponseEntity people(@PathVariable("lastname") String lastname) {
         return new ResponseEntity(personRepository.findByLastnameIgnoreCase(lastname), HttpStatus.OK);
     }
-
 
     @RequestMapping(value = "/rest/people/{id}", method = RequestMethod.DELETE,
             produces = "application/json")
@@ -55,7 +55,7 @@ public class RestController {
                                        @PathVariable("gender") String gender) {
         PersonModel model = personRepository.findOne(id);
 
-        if(personRepository.existsByLastnameEquals(lastname)){
+        if (personRepository.existsByLastnameEquals(lastname)) {
             return new ResponseEntity("This lastname is already exist", HttpStatus.CONFLICT);
         }
         model.setFirstname(firstname);
@@ -65,12 +65,12 @@ public class RestController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-@RequestMapping(value = "/rest/people", method = RequestMethod.PUT,
-produces = "application/json")
-    public ResponseEntity responseAct (@RequestBody PersonModel personModel){
+    @RequestMapping(value = "/rest/people", method = RequestMethod.PUT,
+            produces = "application/json")
+    public ResponseEntity responseAct(@RequestBody PersonModel personModel) {
         personRepository.save(personModel);
         return new ResponseEntity((HttpStatus.OK));
-}
+    }
 
 
 //    zmiana kontaktów ???
