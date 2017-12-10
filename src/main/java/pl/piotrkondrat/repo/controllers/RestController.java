@@ -18,14 +18,14 @@ public class RestController {
     @Autowired
     PersonRepository personRepository;
 
-    // działa
+
     @RequestMapping(value = "/rest/people-search", method = RequestMethod.GET,
             produces = "application/json")
     public ResponseEntity people() {
         return new ResponseEntity(personRepository.findAll(), HttpStatus.OK);
     }
 
-    // działa
+
     @RequestMapping(value = "/rest/people-search/{lastname}", method = RequestMethod.GET,
             produces = "application/json")
     public ResponseEntity people(@PathVariable("lastname") String lastname) {
@@ -65,7 +65,12 @@ public class RestController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-
+@RequestMapping(value = "/rest/people", method = RequestMethod.PUT,
+produces = "application/json")
+    public ResponseEntity responseAct (@RequestBody PersonModel personModel){
+        personRepository.save(personModel);
+        return new ResponseEntity((HttpStatus.OK));
+}
 
 
 //    zmiana kontaktów ???
