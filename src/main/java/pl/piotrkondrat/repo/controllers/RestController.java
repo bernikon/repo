@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.piotrkondrat.repo.models.ContactModel;
 import pl.piotrkondrat.repo.models.PersonModel;
 import pl.piotrkondrat.repo.models.repositories.PersonRepository;
+import pl.piotrkondrat.repo.models.validation.PersonModelValidator;
 
 @Controller
 public class RestController {
@@ -15,15 +16,13 @@ public class RestController {
     @Autowired
     PersonRepository personRepository;
 
+    @Autowired
+    PersonModelValidator personModelValidator;
+
 
     @RequestMapping(value = "/rest/people-search", method = RequestMethod.GET,
             produces = "application/json")
-    public ResponseEntity peopleIndex(@RequestHeader("Password-App") String password) {
-
-        if(!password.equalsIgnoreCase("test")){
-            return new ResponseEntity("No pass", HttpStatus.BAD_REQUEST);
-        }
-
+    public ResponseEntity peopleIndex() {
         return new ResponseEntity(personRepository.findAll(), HttpStatus.OK);
     }
 
@@ -43,6 +42,15 @@ public class RestController {
     @RequestMapping(value = "/rest/people", method = RequestMethod.POST,
             produces = "application/json")
     public ResponseEntity addPerson(@RequestBody PersonModel model) {
+        String error = personModelValidator.validateData(model);
+        if (error != null) {
+            return new ResponseEntity(error, HttpStatus.CONFLICT);
+        }
+
+        for (ContactModel contact : model.getContacts()) {
+            contact.setPerson(model);
+        }
+
         personRepository.save(model);
         return new ResponseEntity(HttpStatus.OK);
     }
@@ -68,21 +76,17 @@ public class RestController {
     @RequestMapping(value = "/rest/people", method = RequestMethod.PUT,
             produces = "application/json")
     public ResponseEntity responseAct(@RequestBody PersonModel personModel) {
+        String error = personModelValidator.validateData(personModel);
+        if (error != null) {
+            return new ResponseEntity(error, HttpStatus.CONFLICT);
+        }
+
+        for (ContactModel contact : personModel.getContacts()) {
+            contact.setPerson(personModel);
+        }
+
         personRepository.save(personModel);
         return new ResponseEntity((HttpStatus.OK));
     }
-
-
-//    zmiana kontaktów ???
-
-//@RequestMapping(value = "/rest/people/{id}/{contactType}/{contactValue}", method = RequestMethod.PUT,
-//produces = "application/json")
-//    public ResponseEntity contactChange(@PathVariable("id") Long id,
-//                                        @PathVariable("contactType") String contactType,
-//                                        @PathVariable("contactValue") String contactValue){
-//    PersonModel model = personRepository.findOne(id);
-//    personRepository.save(model);
-//    return new ResponseEntity(HttpStatus.OK);
-//    }
 
 }

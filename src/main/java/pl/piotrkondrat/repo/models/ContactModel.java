@@ -20,8 +20,8 @@ public class ContactModel {
 
     @ManyToOne
     @JsonBackReference
-    @JoinColumn (name = "person_id")
-    private PersonModel personId;
+    @JoinColumn(name = "person_id")
+    private PersonModel person;
 
     public int getId() {
         return id;
@@ -47,11 +47,11 @@ public class ContactModel {
         this.contactValue = contactValue;
     }
 
-    public PersonModel getPersonId() {
-        return personId;
+    public PersonModel getPerson() {
+        return person;
     }
 
-    public void setPersonId(PersonModel personId) {
-        this.personId = personId;
+    public void setPerson(PersonModel person) {
+        this.person = person;
     }
 }

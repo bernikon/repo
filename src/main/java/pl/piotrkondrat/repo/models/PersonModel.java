@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name="person")
+@Table(name = "person")
 public class PersonModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -16,10 +16,10 @@ public class PersonModel {
 
     private String gender;
 
-    @OneToMany(mappedBy = "personId", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
     private List<ContactModel> contacts;
 
-    public PersonModel(){
+    public PersonModel() {
     }
 
     public long getId() {

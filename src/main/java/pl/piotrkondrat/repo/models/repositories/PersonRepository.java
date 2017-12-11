@@ -11,12 +11,6 @@ import pl.piotrkondrat.repo.models.PersonModel;
 
 import java.util.List;
 
-
-//@RepositoryRestResource(collectionResourceRel = "people", path = "people")
-//public interface PersonRepository extends PagingAndSortingRepository<PersonModel, Integer> {
-//    List<PersonModel> findByFirstname(@Param("name") String name);
-//}
-
 public interface PersonRepository extends CrudRepository<PersonModel, Long> {
     List<PersonModel> findByLastnameIgnoreCase(String text);
 
